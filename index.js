@@ -1,5 +1,7 @@
 const express = require ('express')
 
+const db = require('./dbconnect/db')
+
 const app = express ()
 const port = 5600
 
@@ -9,31 +11,47 @@ app.use(express.urlencoded({extended: false}))
 
 let isLogin = true
 
-
-let dataProject = [
-    {
-        title: 'Programming Nowadays',
-        content: 'Computer programming is the process of performing a particular computation (or more generally, accomplishing a specific computing result), usually by designing and building an executable computer program. Programming involves tasks such as analysis, generating algorithms, profiling algorithms accuracy and resource consumption, and the implementation of algorithms (usually in a chosen programming language, commonly referred to as coding). The source code of a program is written in one or more languages that are intelligible to programmers, rather than machine code, which is directly executed by the central processing unit. The purpose of programming is to find a sequence of instructions that will automate the performance of a task (which can be as complex as an operating system) on a computer, often for solving a given problem. Proficient programming thus usually requires expertise in several different subjects, including knowledge of the application domain, specialized algorithms, and formal logic.',
-        startDate: '11 Juli 2022',
-        endDate: '18 Juli 2022',
-        duration: '1',
-        author: 'Irham Fatriyand',
-        checkedValue: '',
-        image: ''
-    }
-]
+// let dataProject = [
+//     {
+//         title: 'Programming Nowadays',
+//         content: 'Computer programming is the process of performing a particular computation (or more generally, accomplishing a specific computing result), usually by designing and building an executable computer program. Programming involves tasks such as analysis, generating algorithms, profiling algorithms accuracy and resource consumption, and the implementation of algorithms (usually in a chosen programming language, commonly referred to as coding). The source code of a program is written in one or more languages that are intelligible to programmers, rather than machine code, which is directly executed by the central processing unit. The purpose of programming is to find a sequence of instructions that will automate the performance of a task (which can be as complex as an operating system) on a computer, often for solving a given problem. Proficient programming thus usually requires expertise in several different subjects, including knowledge of the application domain, specialized algorithms, and formal logic.',
+//         startDate: '11 Juli 2022',
+//         endDate: '18 Juli 2022',
+//         duration: '1',
+//         author: 'Irham Fatriyand',
+//         checkedValue: '',
+//         image: ''
+//     }
+// ]
 
 app.get ('/', function (request, response) {
-    
-    let data = dataProject.map(function(item){
-        return {
-            ...item,
-            isLogin,
-            duration: getDuration(item.start, item.end)
+
+    let selectQuery = 'SELECT * FROM tb_projects;'
+
+    db.connect((err,client,done)=>{
+        if(err) {
+            return response.redirect('/contact-me')
         }
+
+        client.query(selectQuery, (err,result) =>{
+            if(err) throw err
+
+            let dataPro = result.rows
+
+            dataPro = dataPro.map((project) =>{
+                return {
+                    ...project,
+                    isLogin,
+                    author: 'Irham Fatriyand',
+                    duration: '1 month'
+                }
+            })
+
+            response.render ('index' , {isLogin, dataProject: dataPro})
+        })
     })
 
-    response.render ('index' , {isLogin, dataProject: data})
+    
 }) 
 
 app.get ('/contact-me', function (request, response) {

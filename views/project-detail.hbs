@@ -36,7 +36,7 @@
 
         <div class="project-detail" action="">
           <div class="ms-5 me-5">
-            <h1 class="card-title d-flex justify-content-center fs-2 fw-bold mb-4">{{data.title}}</h1>
+            <h1 class="card-title d-flex justify-content-center fs-2 fw-bold mb-4">{{data.name}}</h1>
             <div class="d-flex mb-4 gap-5">
                 <div class="col-des img-thumbnail">
                           <img src="https://img.freepik.com/free-vector/laptop-with-program-code-isometric-icon-software-development-programming-applications-dark-neon_39422-971.jpg" alt="detailpic">
@@ -45,7 +45,7 @@
                     <p>Author: {{data.author}}</p>
                     <p class="detail-title m-0 mb-3">Duration</p>
                     <div class="m-1">
-                        <p class="detail-icon"><i class="fa-solid fa-calendar-days"></i>{{data.startDate}} - {{data.endDate}}</p>
+                        <p class="detail-icon"><i class="fa-solid fa-calendar-days"></i>{{data.start_date}} - {{data.end_date}}</p>
                         <p class="detail-icon"><i class="fa-solid fa-clock"></i>{{data.duration}} week</p>
                     </div>
                     <div class="mt-5">
@@ -64,7 +64,7 @@
                 </div>
             </div>
             <p style="text-align: justify;">
-                {{data.content}}
+                {{data.description}}
             </p>
         </div>
       </div>

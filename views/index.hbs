@@ -76,7 +76,7 @@
                 
         <div class="d-flex flex-column align-items-center justify-content-evenly bg-white">
             <h1 class ="fs-2 fw-bold mt-5 mb-4">MY PROJECT</h1>
-            <div class="bg-transparent d-flex flex-wrap mb-5" id="project-list-render">
+            <div class="bg-transparent d-flex flex-wrap mb-4" id="project-list-render">
                 {{#each dataProject}}
                 <div class="mx-auto my-4">
                     <div class="mx-5" style="width: 20rem">
@@ -85,10 +85,10 @@
                                 <img src="assets/img/look.jpg" class="card-img size-img" alt="image ex.">
                             </div>
                             <div class="card-body pt-0">
-                                <a href="/project-detail/{{@index}}" class="card-title text-dark fs-5 fw-bold">{{this.title}}</a>
+                                <a href="/project-detail/{{@index}}" class="card-title text-dark fs-5 fw-bold">{{this.name}}</a>
                                 <p class="text-card text-black-50 mb-0">author: {{this.author}}</p>
                                 <p class="text-black-50">Duration: {{this.duration}}</p>
-                                <p class="text-card m-0">{{this.content}}</p>
+                                <p class="text-card m-0">{{this.description}}</p>
                                 <div class="card-body hstack gap-3 text-black-50 ps-0 fs-3">
                                     <div class="bg-transparent">
                                         <i class="fa-brands fa-node-js"></i>
